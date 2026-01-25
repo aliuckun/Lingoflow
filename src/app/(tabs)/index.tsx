@@ -1,8 +1,8 @@
 // src/app/index.tsx
 import { useRouter } from 'expo-router';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { ROUTES } from '../constants/routes';
-import { globalStyles } from '../styles/globalStyles';
+import { ROUTES } from '../../constants/routes';
+import { globalStyles } from '../../styles/globalStyles';
 
 export default function HomeScreen() {
     const router = useRouter();
