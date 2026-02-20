@@ -1,83 +1,194 @@
-import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+/**
+ * PRACTICE SCREEN - Kelime Pratik Sayfası
+ * 
+ * Bu sayfa:
+ * - AsyncStorage'dan kelimeleri çeker
+ * - Her kelime için çoktan seçmeli soru oluşturur
+ * - Kullanıcının cevaplarını kontrol eder
+ * - Doğru/yanlış istatistiklerini günceller
+ * - Örnek cümleleri gösterir (varsa)
+ * - Pratik sonunda skor gösterir
+ */
+
+import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
+import {
+    ActivityIndicator,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { ExampleComponent } from '../../components/practice/example';
 import { QuestionComponent } from '../../components/practice/question';
-
-// Örnek Veri Seti
-const MOCK_QUESTIONS = [
-    {
-        id: 1,
-        question: "Hangisi 'Gelecek' anlamına gelir?",
-        options: ["Past", "Present", "Future", "Now"],
-        correctAnswer: "Future",
-        sentence: "The future belongs to those who believe in the beauty of their dreams.",
-        translation: "Gelecek, hayallerinin güzelliğine inananlarındır."
-    },
-    {
-        id: 2,
-        question: "Hangisi 'Geleneksel' anlamına gelir?",
-        options: ["Modern", "Traditional", "Digital", "Quick"],
-        correctAnswer: "Traditional",
-        sentence: "We should preserve our traditional values.",
-        translation: "Geleneksel değerlerimizi korumalıyız."
-    }
-];
+import { usePractice } from '../../hooks/practice/Usepractice';
 
 export default function PracticeScreen() {
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [hasAnswered, setHasAnswered] = useState(false);
+    const {
+        isLoading,
+        error,
+        hasAnswered,
+        isCorrect,
+        currentIndex,
+        totalQuestions,
+        score,
+        goToNext,
+        handleAnswer,
+        resetPractice,
+        currentQuestion
+    } = usePractice(10); // 10 soruluk pratik
 
-    const currentData = MOCK_QUESTIONS[currentIndex];
+    // Yükleme durumu
+    if (isLoading) {
+        return (
+            <SafeAreaView style={styles.container}>
+                <View style={styles.centerContainer}>
+                    <ActivityIndicator size="large" color="#007AFF" />
+                    <Text style={styles.loadingText}>Sorular hazırlanıyor...</Text>
+                </View>
+            </SafeAreaView>
+        );
+    }
 
-    const handleAnswer = (selected: string) => {
-        setHasAnswered(true);
-    };
-
-    const handleNext = () => {
-        if (currentIndex < MOCK_QUESTIONS.length - 1) {
-            setCurrentIndex(currentIndex + 1);
-            setHasAnswered(false); // Yeni soru için ekranı sıfırla
-        } else {
-            alert("Tebrikler! Tüm soruları tamamladınız.");
-            setCurrentIndex(0); // Başa dön veya başka sayfaya yönlendir
-            setHasAnswered(false);
-        }
-    };
+    // Hata durumu
+    if (error || !currentQuestion) {
+        return (
+            <SafeAreaView style={styles.container}>
+                <View style={styles.centerContainer}>
+                    <Ionicons name="alert-circle" size={64} color="#FF3B30" />
+                    <Text style={styles.errorText}>
+                        {error || 'Bir hata oluştu'}
+                    </Text>
+                    <TouchableOpacity style={styles.retryButton} onPress={resetPractice}>
+                        <Text style={styles.retryButtonText}>Tekrar Dene</Text>
+                    </TouchableOpacity>
+                </View>
+            </SafeAreaView>
+        );
+    }
 
     return (
         <SafeAreaView style={styles.container}>
+            {/* Progress Bar */}
+            <View style={styles.progressContainer}>
+                <View style={styles.progressBar}>
+                    <View
+                        style={[
+                            styles.progressFill,
+                            { width: `${((currentIndex + 1) / totalQuestions) * 100}%` }
+                        ]}
+                    />
+                </View>
+                <View style={styles.statsRow}>
+                    <Text style={styles.progressText}>
+                        Soru {currentIndex + 1} / {totalQuestions}
+                    </Text>
+                    <Text style={styles.scoreText}>
+                        Skor: {score} / {totalQuestions}
+                    </Text>
+                </View>
+            </View>
+
             <ScrollView contentContainerStyle={styles.scrollContent}>
+                {/* Soru Component'i */}
+                {currentQuestion && (
+                    <QuestionComponent
+                        question={currentQuestion.question}
+                        options={currentQuestion.options}
+                        correctAnswer={currentQuestion.correctAnswer}
+                        onAnswer={handleAnswer}
+                        hasAnswered={hasAnswered}
+                    />
+                )}
 
-                <QuestionComponent
-                    question={currentData.question}
-                    options={currentData.options}
-                    onAnswer={handleAnswer}
-                />
-
-                {hasAnswered && (
+                {/* Cevap verildikten sonra örnek cümle ve sonraki buton */}
+                {hasAnswered && currentQuestion && (
                     <View>
-                        <ExampleComponent
-                            sentence={currentData.sentence}
-                            translation={currentData.translation}
-                        />
+                        {/* Örnek Cümle (varsa) */}
+                        {currentQuestion.sentence && currentQuestion.translation && (
+                            <ExampleComponent
+                                sentence={currentQuestion.sentence}
+                                translation={currentQuestion.translation}
+                            />
+                        )}
 
-                        <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
-                            <Text style={styles.nextButtonText}>Sonraki Soru →</Text>
+                        {/* Sonraki Soru Butonu */}
+                        <TouchableOpacity
+                            style={[
+                                styles.nextButton,
+                                isCorrect ? styles.nextButtonCorrect : styles.nextButtonWrong
+                            ]}
+                            onPress={goToNext}
+                        >
+                            <Text style={styles.nextButtonText}>
+                                {currentIndex < totalQuestions - 1
+                                    ? 'Sonraki Soru →'
+                                    : 'Sonuçları Gör 🎉'}
+                            </Text>
                         </TouchableOpacity>
                     </View>
                 )}
-
             </ScrollView>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: '#fff' },
-    scrollContent: { paddingBottom: 40 },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff'
+    },
+    centerContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 20
+    },
+    scrollContent: {
+        paddingBottom: 40
+    },
+
+    // Progress Bar
+    progressContainer: {
+        paddingHorizontal: 20,
+        paddingVertical: 15,
+        backgroundColor: '#F8F9FA',
+        borderBottomWidth: 1,
+        borderBottomColor: '#E5E5EA'
+    },
+    progressBar: {
+        height: 6,
+        backgroundColor: '#E5E5EA',
+        borderRadius: 3,
+        overflow: 'hidden',
+        marginBottom: 10
+    },
+    progressFill: {
+        height: '100%',
+        backgroundColor: '#007AFF',
+        borderRadius: 3
+    },
+    statsRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    progressText: {
+        fontSize: 14,
+        fontWeight: '600',
+        color: '#1C1C1E'
+    },
+    scoreText: {
+        fontSize: 14,
+        fontWeight: '700',
+        color: '#007AFF'
+    },
+
+    // Next Button
     nextButton: {
-        backgroundColor: '#34C759',
         margin: 20,
         padding: 18,
         borderRadius: 12,
@@ -88,5 +199,40 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 3,
     },
-    nextButtonText: { color: '#fff', fontSize: 18, fontWeight: 'bold' },
+    nextButtonCorrect: {
+        backgroundColor: '#34C759',
+    },
+    nextButtonWrong: {
+        backgroundColor: '#007AFF',
+    },
+    nextButtonText: {
+        color: '#fff',
+        fontSize: 18,
+        fontWeight: 'bold'
+    },
+
+    // Loading & Error
+    loadingText: {
+        marginTop: 16,
+        fontSize: 16,
+        color: '#8E8E93'
+    },
+    errorText: {
+        marginTop: 16,
+        fontSize: 16,
+        color: '#FF3B30',
+        textAlign: 'center'
+    },
+    retryButton: {
+        marginTop: 20,
+        backgroundColor: '#007AFF',
+        paddingHorizontal: 24,
+        paddingVertical: 12,
+        borderRadius: 8
+    },
+    retryButtonText: {
+        color: '#fff',
+        fontSize: 15,
+        fontWeight: '600'
+    }
 });

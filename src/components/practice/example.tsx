@@ -1,3 +1,11 @@
+/**
+ * EXAMPLE COMPONENT - Örnek Cümle Gösterici
+ * 
+ * Cevap verildikten sonra:
+ * - Kelimenin örnek cümlesini gösterir
+ * - Türkçe çevirisini gösterir
+ */
+
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -19,8 +27,17 @@ export const ExampleComponent = ({ sentence, translation }: ExampleProps) => {
 };
 
 const styles = StyleSheet.create({
-    container: { paddingHorizontal: 20, marginTop: 10 },
-    header: { fontSize: 14, fontWeight: '600', color: '#8E8E93', marginBottom: 8, marginLeft: 5 },
+    container: {
+        paddingHorizontal: 20,
+        marginTop: 10
+    },
+    header: {
+        fontSize: 14,
+        fontWeight: '600',
+        color: '#8E8E93',
+        marginBottom: 8,
+        marginLeft: 5
+    },
     card: {
         backgroundColor: '#F9F9F9',
         padding: 20,
@@ -28,6 +45,15 @@ const styles = StyleSheet.create({
         borderLeftWidth: 4,
         borderLeftColor: '#34C759',
     },
-    sentence: { fontSize: 18, fontWeight: '500', color: '#333', marginBottom: 8 },
-    translation: { fontSize: 16, color: '#666', fontStyle: 'italic' },
+    sentence: {
+        fontSize: 18,
+        fontWeight: '500',
+        color: '#333',
+        marginBottom: 8
+    },
+    translation: {
+        fontSize: 16,
+        color: '#666',
+        fontStyle: 'italic'
+    },
 });
