@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import React, { useMemo, useState } from 'react';
 import {
     ActivityIndicator,
@@ -12,10 +13,12 @@ import {
     View
 } from 'react-native';
 
+import { ROUTES } from '../../constants/routes';
 import { useVocabulary } from '../../hooks/vocabulary/useVocabulary';
 import { PartOfSpeech, Word } from "../../types/word";
 
 export const VocabList = () => {
+    const router = useRouter();
     const { words, isLoading, error, refresh, deleteWord, toggleFavorite } = useVocabulary();
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedFilter, setSelectedFilter] = useState<PartOfSpeech | 'all'>('all');
@@ -62,12 +65,10 @@ export const VocabList = () => {
     const filteredWords = useMemo(() => {
         let filtered = words;
 
-        // Kelime türü filtreleme
         if (selectedFilter !== 'all') {
             filtered = filtered.filter(item => item.partOfSpeech === selectedFilter);
         }
 
-        // Arama filtreleme
         if (searchQuery.trim()) {
             filtered = filtered.filter(item => {
                 const itemData = `${item.word.toUpperCase()} ${item.meaning.toUpperCase()} ${item.partOfSpeech.toUpperCase()}`;
@@ -76,7 +77,6 @@ export const VocabList = () => {
             });
         }
 
-        // Tarihe göre sırala (en yeni en üstte)
         return filtered.sort((a, b) => b.createdAt - a.createdAt);
     }, [words, searchQuery, selectedFilter]);
 
@@ -84,7 +84,12 @@ export const VocabList = () => {
         const themeColor = getPosColor(item.partOfSpeech);
 
         return (
-            <View style={styles.tableRow}>
+            // Satıra tıklayınca detay sayfasına git
+            <TouchableOpacity
+                style={styles.tableRow}
+                onPress={() => router.push(ROUTES.VOCABULARY_DETAIL(item.id))}
+                activeOpacity={0.7}
+            >
                 {/* Sol Kısım: Kelime ve Tip */}
                 <View style={styles.mainInfo}>
                     <View style={styles.wordRow}>
@@ -95,7 +100,7 @@ export const VocabList = () => {
                     </View>
                     <View style={[styles.posBadge, { borderColor: themeColor }]}>
                         <Text style={[styles.posText, { color: themeColor }]}>
-                            {item.partOfSpeech.substring(0, 3)}
+                            {item.partOfSpeech.substring(0, 3).toUpperCase()}
                         </Text>
                     </View>
                     {item.familiarity !== undefined && item.familiarity > 0 && (
@@ -127,25 +132,35 @@ export const VocabList = () => {
                 <View style={styles.metaInfo}>
                     <Text style={styles.dateText}>{formatDate(item.createdAt)}</Text>
                     <View style={styles.rowActions}>
+                        {/* Favori: kendi event'i — satır tıklamasının üstüne çıkmaması için stopPropagation yok,
+                            TouchableOpacity nested olduğu için zaten kendi onPress'i tetiklenir */}
                         <TouchableOpacity
                             style={styles.smallAction}
-                            onPress={() => toggleFavorite(item.id)}
+                            onPress={(e) => {
+                                e.stopPropagation?.();
+                                toggleFavorite(item.id);
+                            }}
+                            hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
                         >
                             <Ionicons
                                 name={item.isFavorite ? "star" : "star-outline"}
-                                size={18}
+                                size={20}
                                 color={item.isFavorite ? "#FFD700" : "#007AFF"}
                             />
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={styles.smallAction}
-                            onPress={() => handleDelete(item.id, item.word)}
+                            onPress={(e) => {
+                                e.stopPropagation?.();
+                                handleDelete(item.id, item.word);
+                            }}
+                            hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
                         >
-                            <Ionicons name="trash-outline" size={18} color="#FF3B30" />
+                            <Ionicons name="trash-outline" size={20} color="#FF3B30" />
                         </TouchableOpacity>
                     </View>
                 </View>
-            </View>
+            </TouchableOpacity>
         );
     };
 
@@ -198,6 +213,7 @@ export const VocabList = () => {
                     <TextInput
                         style={styles.searchInput}
                         placeholder="Kelime ara..."
+                        placeholderTextColor="#AEAEB2"
                         value={searchQuery}
                         onChangeText={setSearchQuery}
                         clearButtonMode="while-editing"
@@ -294,7 +310,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: '#F2F2F7',
-        borderRadius: 10,
+        borderRadius: 12,
         paddingHorizontal: 12,
     },
     searchIcon: {
@@ -302,10 +318,10 @@ const styles = StyleSheet.create({
     },
     searchInput: {
         flex: 1,
-        paddingVertical: 10,
-        fontSize: 15
+        paddingVertical: 12,
+        fontSize: 16,
+        color: '#1C1C1E'
     },
-
     filterContainer: {
         flexDirection: 'row',
         flexWrap: 'wrap',
@@ -313,25 +329,25 @@ const styles = StyleSheet.create({
         marginTop: 12
     },
     filterButton: {
-        paddingHorizontal: 12,
-        paddingVertical: 6,
+        paddingHorizontal: 14,
+        paddingVertical: 7,
         borderRadius: 16,
         backgroundColor: '#F2F2F7',
         borderWidth: 1,
         borderColor: '#E5E5EA'
     },
     filterButtonText: {
-        fontSize: 12,
+        fontSize: 13,
         color: '#8E8E93',
         fontWeight: '600'
     },
-
     statsBar: {
         marginTop: 10,
         paddingLeft: 5,
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 6
+        gap: 6,
+        paddingBottom: 4
     },
     statsText: {
         fontSize: 13,
@@ -345,7 +361,6 @@ const styles = StyleSheet.create({
         fontSize: 11,
         color: '#8E8E93'
     },
-
     tableHeader: {
         flexDirection: 'row',
         paddingHorizontal: 20,
@@ -361,7 +376,6 @@ const styles = StyleSheet.create({
         color: '#8E8E93',
         letterSpacing: 0.5
     },
-
     listContent: {
         paddingBottom: 20,
         flexGrow: 1
@@ -370,9 +384,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: 20,
-        paddingVertical: 15,
+        paddingVertical: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#F2F2F7',
+        backgroundColor: '#FFFFFF'
     },
     mainInfo: {
         flex: 2.5,
@@ -393,7 +408,7 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         borderWidth: 1,
         paddingHorizontal: 5,
-        paddingVertical: 1,
+        paddingVertical: 2,
         borderRadius: 4
     },
     posText: {
@@ -413,7 +428,6 @@ const styles = StyleSheet.create({
         height: '100%',
         borderRadius: 1.5
     },
-
     meaningInfo: {
         flex: 3.5,
         paddingRight: 10,
@@ -428,11 +442,10 @@ const styles = StyleSheet.create({
         color: '#8E8E93',
         fontStyle: 'italic'
     },
-
     metaInfo: {
         flex: 2,
         alignItems: 'flex-end',
-        gap: 6
+        gap: 8
     },
     dateText: {
         fontSize: 11,
@@ -440,12 +453,11 @@ const styles = StyleSheet.create({
     },
     rowActions: {
         flexDirection: 'row',
-        gap: 12
+        gap: 14
     },
     smallAction: {
         padding: 2
     },
-
     emptyContainer: {
         alignItems: 'center',
         marginTop: 80,
@@ -464,7 +476,6 @@ const styles = StyleSheet.create({
         marginTop: 8,
         textAlign: 'center'
     },
-
     errorText: {
         color: '#FF3B30',
         fontSize: 16,

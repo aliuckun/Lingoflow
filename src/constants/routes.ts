@@ -1,12 +1,17 @@
 export const ROUTES = {
     HOME: 'index',
-    LIBRARY: 'library',    // 'library/index' değil, çünkü dosya direkt library.tsx
+    LIBRARY: 'library',
     PRACTICE: 'practice',
     PROGRESS: 'progress',
     VOCABULARY: 'vocabulary',
 
     LIBRARY_DETAIL: (id: string) => ({
         pathname: '/library/[id]',
+        params: { id }
+    } as const),
+
+    VOCABULARY_DETAIL: (id: string) => ({
+        pathname: '/vocabulary/[id]',
         params: { id }
     } as const),
 

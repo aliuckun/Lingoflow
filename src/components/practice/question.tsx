@@ -10,12 +10,6 @@ interface QuestionProps {
     hasAnswered: boolean;
 }
 
-/**
- * Soru component'i - Çoktan seçmeli soru gösterir
- * - Kullanıcı cevap seçer
- * - Doğru/yanlış durumunu görsel olarak gösterir
- * - Cevap verildikten sonra tüm seçenekleri disable eder
- */
 export const QuestionComponent = ({
     question,
     options,
@@ -25,99 +19,88 @@ export const QuestionComponent = ({
 }: QuestionProps) => {
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
-    // Soru değiştiğinde seçimi sıfırla
     useEffect(() => {
         setSelectedOption(null);
     }, [question]);
 
-    /**
-     * Seçenek tıklama handler'ı
-     * - İlk tıklamayı kabul eder
-     * - Parent'a cevabı bildirir
-     */
     const handlePress = (option: string) => {
-        if (selectedOption) return; // Zaten seçilmişse bir şey yapma
+        if (selectedOption) return;
         setSelectedOption(option);
         onAnswer(option);
     };
 
-    /**
-     * Seçeneğin durumunu belirler (doğru/yanlış/normal)
-     */
-    const getOptionStyle = (option: string) => {
+    // Tek bir fonksiyon — hem buton hem yazı rengini döndürür
+    const getState = (option: string): 'default' | 'selected' | 'correct' | 'wrong' | 'dimmed' => {
         if (!hasAnswered) {
-            return selectedOption === option ? styles.selectedButton : styles.button;
+            return selectedOption === option ? 'selected' : 'default';
         }
-
-        // Cevap verildikten sonra
-        if (option === correctAnswer) {
-            return styles.correctButton; // Doğru cevabı yeşil göster
-        }
-        if (option === selectedOption && option !== correctAnswer) {
-            return styles.wrongButton; // Yanlış seçimi kırmızı göster
-        }
-        return styles.button;
+        if (option === correctAnswer) return 'correct';
+        if (option === selectedOption) return 'wrong';
+        return 'dimmed'; // cevap verildikten sonra diğer seçenekler soluklaşır
     };
 
-    /**
-     * Seçenek text stilini belirler
-     */
-    const getOptionTextStyle = (option: string) => {
-        if (!hasAnswered) {
-            return selectedOption === option ? styles.selectedText : styles.buttonText;
+    const buttonStyle = (state: ReturnType<typeof getState>) => {
+        switch (state) {
+            case 'selected': return [styles.btnBase, styles.btnSelected];
+            case 'correct': return [styles.btnBase, styles.btnCorrect];
+            case 'wrong': return [styles.btnBase, styles.btnWrong];
+            case 'dimmed': return [styles.btnBase, styles.btnDimmed];
+            default: return [styles.btnBase];
         }
-
-        if (option === correctAnswer || option === selectedOption) {
-            return styles.selectedText;
-        }
-        return styles.buttonText;
     };
 
-    /**
-     * İkon gösterir (doğru/yanlış)
-     */
-    const renderIcon = (option: string) => {
-        if (!hasAnswered) return null;
-
-        if (option === correctAnswer) {
-            return <Ionicons name="checkmark-circle" size={24} color="#fff" />;
+    const textStyle = (state: ReturnType<typeof getState>) => {
+        switch (state) {
+            case 'correct':
+            case 'wrong':
+            case 'selected': return styles.textLight;
+            case 'dimmed': return styles.textDimmed;
+            default: return styles.textDark;
         }
-        if (option === selectedOption && option !== correctAnswer) {
-            return <Ionicons name="close-circle" size={24} color="#fff" />;
-        }
-        return null;
     };
 
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{question}</Text>
+
             <View style={styles.optionsContainer}>
-                {options.map((option, index) => (
-                    <TouchableOpacity
-                        key={index}
-                        disabled={!!selectedOption}
-                        style={getOptionStyle(option)}
-                        onPress={() => handlePress(option)}
-                    >
-                        <Text style={getOptionTextStyle(option)}>
-                            {option}
-                        </Text>
-                        {renderIcon(option)}
-                    </TouchableOpacity>
-                ))}
+                {options.map((option, index) => {
+                    const state = getState(option);
+                    return (
+                        <TouchableOpacity
+                            key={index}
+                            disabled={!!selectedOption}
+                            style={buttonStyle(state)}
+                            onPress={() => handlePress(option)}
+                            activeOpacity={0.75}
+                        >
+                            <Text style={textStyle(state)} numberOfLines={2}>
+                                {option}
+                            </Text>
+
+                            {/* İkon — sadece doğru ya da yanlış seçimde */}
+                            {hasAnswered && state === 'correct' && (
+                                <Ionicons name="checkmark-circle" size={22} color="#fff" />
+                            )}
+                            {hasAnswered && state === 'wrong' && (
+                                <Ionicons name="close-circle" size={22} color="#fff" />
+                            )}
+                        </TouchableOpacity>
+                    );
+                })}
             </View>
 
-            {/* Feedback Mesajı */}
+            {/* Feedback */}
             {hasAnswered && (
                 <View style={styles.feedbackContainer}>
                     {selectedOption === correctAnswer ? (
                         <View style={styles.correctFeedback}>
-                            <Ionicons name="checkmark-circle" size={28} color="#34C759" />
+                            <Ionicons name="checkmark-circle" size={26} color="#34C759" />
                             <Text style={styles.correctText}>Doğru! 🎉</Text>
                         </View>
                     ) : (
                         <View style={styles.wrongFeedback}>
-                            <Ionicons name="close-circle" size={28} color="#FF3B30" />
+                            <Ionicons name="close-circle" size={26} color="#FF3B30" />
                             <Text style={styles.wrongText}>
                                 Yanlış. Doğru cevap: {correctAnswer}
                             </Text>
@@ -132,89 +115,104 @@ export const QuestionComponent = ({
 const styles = StyleSheet.create({
     container: {
         padding: 20,
-        alignItems: 'center'
     },
     title: {
-        fontSize: 24,
+        fontSize: 22,
         fontWeight: '800',
-        marginBottom: 30,
+        marginBottom: 24,
         textAlign: 'center',
-        color: '#1A1A1A'
+        color: '#1A1A1A',
+        lineHeight: 30,
     },
     optionsContainer: {
-        width: '100%'
+        width: '100%',
+        gap: 10,
     },
-    button: {
-        backgroundColor: '#F2F2F7',
-        padding: 18,
-        borderRadius: 15,
-        marginBottom: 12,
-        alignItems: 'center',
-        borderWidth: 1,
-        borderColor: '#E5E5EA',
+
+    // ── Buton base: tüm ortak stiller burada ──────────────────────────────────
+    btnBase: {
         flexDirection: 'row',
-        justifyContent: 'center',
-        gap: 10
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingVertical: 16,
+        paddingHorizontal: 18,
+        borderRadius: 14,
+        borderWidth: 1.5,
+        borderColor: '#E5E5EA',
+        backgroundColor: '#F2F2F7',
+        minHeight: 56,
     },
-    selectedButton: {
+    btnSelected: {
         backgroundColor: '#007AFF',
-        borderColor: '#007AFF'
+        borderColor: '#007AFF',
     },
-    correctButton: {
+    btnCorrect: {
         backgroundColor: '#34C759',
         borderColor: '#34C759',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingHorizontal: 18
     },
-    wrongButton: {
+    btnWrong: {
         backgroundColor: '#FF3B30',
         borderColor: '#FF3B30',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingHorizontal: 18
     },
-    buttonText: {
+    btnDimmed: {
+        backgroundColor: '#F9F9F9',
+        borderColor: '#F2F2F7',
+        opacity: 0.6,
+    },
+
+    // ── Yazı stilleri ─────────────────────────────────────────────────────────
+    textDark: {
         color: '#1C1C1E',
-        fontSize: 17,
-        fontWeight: '500'
+        fontSize: 16,
+        fontWeight: '500',
+        flex: 1,
     },
-    selectedText: {
-        color: '#fff'
+    textLight: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '600',
+        flex: 1,
     },
+    textDimmed: {
+        color: '#AEAEB2',
+        fontSize: 16,
+        fontWeight: '500',
+        flex: 1,
+    },
+
+    // ── Feedback ──────────────────────────────────────────────────────────────
     feedbackContainer: {
-        marginTop: 20,
-        width: '100%'
+        marginTop: 16,
     },
     correctFeedback: {
         flexDirection: 'row',
         alignItems: 'center',
         gap: 10,
         backgroundColor: '#E8F5E9',
-        padding: 16,
+        padding: 14,
         borderRadius: 12,
         borderLeftWidth: 4,
-        borderLeftColor: '#34C759'
+        borderLeftColor: '#34C759',
     },
     wrongFeedback: {
         flexDirection: 'row',
         alignItems: 'center',
         gap: 10,
         backgroundColor: '#FFEBEE',
-        padding: 16,
+        padding: 14,
         borderRadius: 12,
         borderLeftWidth: 4,
-        borderLeftColor: '#FF3B30'
+        borderLeftColor: '#FF3B30',
     },
     correctText: {
-        fontSize: 18,
+        fontSize: 17,
         fontWeight: '600',
-        color: '#34C759'
+        color: '#34C759',
     },
     wrongText: {
-        fontSize: 16,
+        fontSize: 15,
         fontWeight: '600',
         color: '#FF3B30',
-        flex: 1
-    }
+        flex: 1,
+    },
 });

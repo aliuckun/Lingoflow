@@ -5,7 +5,7 @@
         "language": "de",
         "title": "Anna und ihr neuer Tag",
         "wordCount": 180,
-        "text": "Anna ist 22 Jahre alt. Sie wohnt in Berlin. Anna lebt allein in einer kleinen Wohnung. Jeden Morgen steht sie um sieben Uhr auf. Sie macht Kaffee und isst Brot mit Käse.\n\nNach dem Frühstück geht Anna zur Arbeit. Sie arbeitet in einem Büro. Die Arbeit beginnt um neun Uhr. Anna hat nette Kollegen. Sie sprechen viel und lachen zusammen.\n\nIn der Mittagspause isst Anna mit ihrer Freundin Lisa. Sie gehen oft in ein kleines Restaurant. Anna mag Pasta und Salat. Nach der Pause arbeitet sie weiter.\n\nAm Abend geht Anna nach Hause. Sie kocht Essen und hört Musik. Manchmal liest sie ein Buch. Um elf Uhr geht sie ins Bett. Anna ist müde, aber glücklich."
+        "text": "Anna ist 22 Jahre alt. Sie wohnt in Berlin. Anna lebt allein in einer kleinen Wohnung. Jeden Morgen steht sie um sieben Uhr auf. Sie macht Kaffee und isst Brot mit Kase.\n\nNach dem Fruhstuck geht Anna zur Arbeit. Sie arbeitet in einem Buro. Die Arbeit beginnt um neun Uhr. Anna hat nette Kollegen. Sie sprechen viel und lachen zusammen.\n\nIn der Mittagspause isst Anna mit ihrer Freundin Lisa. Sie gehen oft in ein kleines Restaurant. Anna mag Pasta und Salat. Nach der Pause arbeitet sie weiter.\n\nAm Abend geht Anna nach Hause. Sie kocht Essen und hort Musik. Manchmal liest sie ein Buch. Um elf Uhr geht sie ins Bett. Anna ist mude, aber glucklich."
     },
     {
         "id": "a2_story_002",
@@ -13,6 +13,166 @@
         "language": "de",
         "title": "Ein Wochenende in Hamburg",
         "wordCount": 320,
-        "text": "Tom ist 28 Jahre alt und wohnt in München. Am Freitag fährt er nach Hamburg. Er möchte seine Freundin Maria besuchen. Die Reise dauert fünf Stunden. Tom hört Musik im Zug und schaut aus dem Fenster.\n\nAm Abend kommt Tom in Hamburg an. Maria wartet am Bahnhof. Sie freuen sich sehr. Zusammen gehen sie nach Hause. Sie kochen Abendessen und sprechen über ihre Woche.\n\nAm Samstag stehen sie spät auf. Nach dem Frühstück gehen sie in die Stadt. Sie besuchen die Elbphilharmonie und machen viele Fotos. Danach trinken sie Kaffee in einem Café.\n\nAm Nachmittag gehen sie spazieren. Das Wetter ist gut, aber es ist ein bisschen kalt. Am Abend sehen sie einen Film zu Hause.\n\nAm Sonntag muss Tom zurück nach München fahren. Er ist traurig, aber auch froh. Das Wochenende war sehr schön."
+        "text": "Tom ist 28 Jahre alt und wohnt in Munchen. Am Freitag fahrt er nach Hamburg. Er mochte seine Freundin Maria besuchen. Die Reise dauert funf Stunden. Tom hort Musik im Zug und schaut aus dem Fenster.\n\nAm Abend kommt Tom in Hamburg an. Maria wartet am Bahnhof. Sie freuen sich sehr. Zusammen gehen sie nach Hause. Sie kochen Abendessen und sprechen uber ihre Woche.\n\nAm Samstag stehen sie spat auf. Nach dem Fruhstuck gehen sie in die Stadt. Sie besuchen die Elbphilharmonie und machen viele Fotos. Danach trinken sie Kaffee in einem Cafe.\n\nAm Nachmittag gehen sie spazieren. Das Wetter ist gut, aber es ist ein bisschen kalt. Am Abend sehen sie einen Film zu Hause.\n\nAm Sonntag muss Tom zuruck nach Munchen fahren. Er ist traurig, aber auch froh. Das Wochenende war sehr schon."
+    },
+    {
+        "id": "a1_story_003",
+        "level": "A1",
+        "language": "de",
+        "title": "Mein Hund Max",
+        "wordCount": 160,
+        "text": "Ich habe einen Hund. Er heisst Max. Max ist gross und braun. Er ist drei Jahre alt.\n\nJeden Morgen gehe ich mit Max spazieren. Wir gehen in den Park. Max lauft sehr schnell. Er mag Balle. Ich werfe den Ball und Max bringt ihn zuruck.\n\nNach dem Spaziergang essen wir. Ich esse Brot. Max frisst Hundefutter. Er trinkt viel Wasser.\n\nAbends sitzt Max neben mir auf dem Sofa. Wir schauen zusammen fern. Max schlaft bald ein. Er schnarcht ein bisschen. Ich lache.\n\nMax ist mein bester Freund. Ich liebe ihn sehr."
+    },
+    {
+        "id": "a1_story_004",
+        "level": "A1",
+        "language": "de",
+        "title": "Im Supermarkt",
+        "wordCount": 175,
+        "text": "Heute gehe ich in den Supermarkt. Ich brauche Milch, Brot und Apfel. Ich nehme eine Einkaufstasche.\n\nDer Supermarkt ist gross. Es gibt viele Menschen. Ich suche zuerst die Milch. Sie steht im Kuhlregal. Dann nehme ich Brot vom Regal. Das Brot ist frisch.\n\nIch gehe zur Obstabteilung. Es gibt Apfel, Bananen und Orangen. Die Apfel sind rot und schon. Ich nehme sechs Apfel.\n\nAn der Kasse warte ich kurz. Eine Frau ist vor mir. Ich lege meine Sachen auf das Band. Die Kassiererin sagt: 'Das macht vier Euro funfzig.' Ich bezahle mit Karte.\n\nIch packe alles in die Tasche und gehe nach Hause. Das Einkaufen war schnell und einfach."
+    },
+    {
+        "id": "a2_story_005",
+        "level": "A2",
+        "language": "de",
+        "title": "Lenas neuer Job",
+        "wordCount": 290,
+        "text": "Lena ist 25 Jahre alt. Sie hat gerade einen neuen Job gefunden. Sie arbeitet jetzt in einer Backerei in der Innenstadt. Die Arbeit beginnt jeden Morgen um sechs Uhr. Das ist fruh, aber Lena ist zufrieden.\n\nIn der Backerei macht Lena viele verschiedene Dinge. Sie backt Brot, Brotchen und Kuchen. Sie bedient auch die Kunden und erklart ihnen, was es gibt. Die Kunden sind meistens freundlich.\n\nIhr Chef heisst Herr Becker. Er ist streng, aber fair. Er zeigt Lena alles genau. Die Qualitat ist am wichtigsten, sagt er immer.\n\nNach der Arbeit ist Lena oft mude. Sie fahrt mit dem Fahrrad nach Hause. Das dauert zwanzig Minuten. Zu Hause duscht sie und isst etwas.\n\nAm Wochenende hat Lena frei. Sie trifft ihre Freunde und schlaft lange. Sie ist froh, einen Job zu haben, der ihr Spass macht."
+    },
+    {
+        "id": "a2_story_006",
+        "level": "A2",
+        "language": "de",
+        "title": "Der Arzttermin",
+        "wordCount": 270,
+        "text": "Jonas hat Halsschmerzen und Fieber. Er fuhlt sich nicht gut. Er ruft beim Arzt an und macht einen Termin. Der Arzt hat am Dienstag um zehn Uhr Zeit.\n\nAm Dienstag fahrt Jonas mit dem Bus zur Arztpraxis. Er wartet im Wartezimmer. Es gibt alte Zeitschriften auf dem Tisch. Jonas schaut auf sein Handy.\n\nNach zwanzig Minuten ruft die Arzthelferin seinen Namen. Jonas geht ins Zimmer. Doktor Schneider ist freundlich. Er fragt: 'Seit wann haben Sie die Schmerzen?' Jonas antwortet: 'Seit drei Tagen.'\n\nDer Arzt untersucht Jonas. Er schaut in den Hals und misst die Temperatur. Sie haben eine Erkaltung, sagt er. Er schreibt ein Rezept fur Medikamente.\n\nJonas geht zur Apotheke und kauft die Tabletten. Er geht nach Hause, trinkt viel Tee und ruht sich aus. Nach vier Tagen geht es ihm besser."
+    },
+    {
+        "id": "b1_story_007",
+        "level": "B1",
+        "language": "de",
+        "title": "Das Vorstellungsgesprach",
+        "wordCount": 420,
+        "text": "Sophie hat sich auf eine Stelle als Grafikdesignerin beworben. Das Unternehmen heisst CreativeHub und befindet sich im Zentrum von Frankfurt. Heute ist der Tag des Vorstellungsgesprachs.\n\nSophie hat sich gut vorbereitet. Sie kennt die Website des Unternehmens auswendig und hat ihr Portfolio sorgfaltig zusammengestellt. Trotzdem ist sie nervos. Sie zieht ihr blaues Hemd an, das ihr am besten steht.\n\nSie kommt zehn Minuten fruher an. Die Empfangsdame begrusst sie freundlich und bittet sie, kurz zu warten. Sophie atmet tief durch und versucht, ruhig zu bleiben.\n\nDer Personalleiter, Herr Wagner, empfangt sie mit einem Handedruck. Das Gesprach beginnt mit einfachen Fragen: Warum mochte Sophie bei CreativeHub arbeiten? Was sind ihre Starken und Schwachen? Sophie antwortet klar und selbstsicher.\n\nDann zeigt sie ihr Portfolio. Sie erklart ihre Projekte und spricht uber ihre Ideen. Herr Wagner stellt viele Fragen und hort aufmerksam zu. Sophie merkt, dass er wirklich interessiert ist.\n\nNach einer Stunde ist das Gesprach vorbei. Herr Wagner sagt, dass er sich in einer Woche melden wird. Sophie verlasst das Buro mit gutem Gefuhl. Sie hat ihr Bestes gegeben.\n\nDrei Tage spater ruft Herr Wagner an. Sophie bekommt die Stelle. Sie ist uberglucklich und ruft sofort ihre Mutter an."
+    },
+    {
+        "id": "b1_story_008",
+        "level": "B1",
+        "language": "de",
+        "title": "Umzug in eine neue Stadt",
+        "wordCount": 400,
+        "text": "Felix ist 30 Jahre alt und zieht von Leipzig nach Koln. Er hat dort eine neue Arbeit als Ingenieur gefunden. Der Umzug ist aufregend, aber auch stressig.\n\nDrei Wochen vor dem Umzug beginnt Felix mit dem Packen. Er hat viele Bucher, Kleider und Mobel. Er wirft auch alte Sachen weg, die er nicht mehr braucht. Sein Bruder hilft ihm dabei.\n\nAm Umzugstag kommen fruh morgens zwei Manner mit einem grossen Lastwagen. Sie tragen die schweren Mobel. Felix kummert sich um die Kartons. Es dauert den ganzen Morgen.\n\nIn Koln angekommen, ist die Wohnung zuerst ein Chaos. Kartons uberall, nichts an seinem Platz. Felix fangt mit der Kuche an, weil er Hunger hat. Danach richtet er das Schlafzimmer ein.\n\nIn den ersten Wochen lernt Felix die Stadt kennen. Er fahrt viel mit dem Fahrrad und entdeckt schone Cafes und Parks. Die Menschen in Koln sind offen und freundlich.\n\nDas Einzige, was Felix fehlt, sind seine alten Freunde. Aber er weiss, dass er neue kennenlernen wird. Er meldet sich bei einem Sportverein an. Beim ersten Training trifft er zwei nette Manner. Vielleicht werden sie Freunde."
+    },
+    {
+        "id": "b1_story_009",
+        "level": "B1",
+        "language": "de",
+        "title": "Die Sprachschule",
+        "wordCount": 380,
+        "text": "Mia kommt aus der Turkei und wohnt seit einem Jahr in Deutschland. Ihr Deutsch ist noch nicht perfekt, aber sie lernt jeden Tag etwas Neues. Seit drei Monaten besucht sie eine Sprachschule in der Nahe ihrer Wohnung.\n\nDer Unterricht findet dienstags und donnerstags statt. Die Lehrerin heisst Frau Huber. Sie spricht langsam und deutlich, das gefallt Mia sehr. In der Klasse sind zehn Studierende aus verschiedenen Landern: Japan, Brasilien, Syrien, Polen und Spanien.\n\nMia mag die Atmosphare in der Klasse. Alle helfen einander. Wenn sie ein Wort nicht versteht, fragen die anderen auf Englisch nach. Manchmal machen sie auch Spiele, um neue Worter zu lernen.\n\nNach dem Unterricht geht Mia manchmal mit ihren Kommilitonen in ein Cafe. Sie versuchen, immer auf Deutsch zu sprechen, auch wenn es schwierig ist. Manchmal lachen sie uber ihre Fehler. Das macht nichts, Fehler sind wichtig beim Lernen.\n\nZu Hause wiederholt Mia den Stoff. Sie schreibt neue Worter in ein Heft und liest deutsche Kinderbucher. Ihr Lieblingsfilm ist auf Deutsch, und sie schaut ihn mit Untertiteln.\n\nMia weiss, dass Sprachen Zeit brauchen. Aber sie gibt nicht auf. Jeden Monat merkt sie, dass sie besser wird. Das motiviert sie sehr."
+    },
+    {
+        "id": "b2_story_010",
+        "level": "B2",
+        "language": "de",
+        "title": "Der lange Weg zuruck",
+        "wordCount": 520,
+        "text": "Als David nach zehn Jahren nach Deutschland zuruckkehrte, erkannte er seine Heimatstadt kaum wieder. Er war mit zwanzig Jahren nach Kanada ausgewandert, voller Traume und Abenteuerlust. Nun stand er mit dreissig Jahren am Bahnhof seiner Kindheit und betrachtete die veranderte Skyline.\n\nSeine Eltern erwarteten ihn zu Hause. Der Geruch von Mamas Kartoffelsuppe lag in der Luft, als er die Tur offnete. Manche Dinge anderten sich eben doch nicht. Nach dem langen Abendessen, bei dem jeder seine Geschichten erzahlte, zog sich David in sein altes Zimmer zuruck.\n\nIn den folgenden Wochen suchte er eine eigene Wohnung und schaute sich nach Arbeit um. Der deutsche Arbeitsmarkt hatte sich verandert. Viele Stellenanzeigen verlangten Kenntnisse in Bereichen, die es vor zehn Jahren noch gar nicht gegeben hatte. David war Softwareentwickler, aber die Technologien hatten sich rasend schnell weiterentwickelt.\n\nEr meldete sich bei einem Bootcamp an, um seine Kenntnisse aufzufrischen. Die anderen Teilnehmer waren meist junger als er. Trotzdem fand er schnell Anschluss. Seine Lebenserfahrung aus Kanada machte ihn interessant in den Augen der anderen.\n\nNach drei Monaten bekam David ein Jobangebot von einem Start-up in Berlin. Die Arbeit war spannend, das Team international und dynamisch. Zum ersten Mal seit seiner Ruckkehr hatte David das Gefuhl, wirklich angekommen zu sein.\n\nDoch innerlich kampfte er noch. Er vermisste die Weite Kanadas, die anderen gesellschaftlichen Normen, die Freunde, die er dort zuruckgelassen hatte. Die Ruckkehr in die Heimat war kein einfacher Neuanfang, sondern ein komplizierter Prozess der Neuorientierung.\n\nLangsam aber sicher fand David seinen Rhythmus. Er begann, alte Schulfreunde wieder zu treffen und neue Kontakte zu knupfen. Deutschland war nicht mehr das Land, das er verlassen hatte, und er selbst war auch nicht mehr derselbe. Aber vielleicht war genau das der Anfang von etwas Neuem."
+    },
+    {
+        "id": "b2_story_011",
+        "level": "B2",
+        "language": "de",
+        "title": "Zwischen zwei Welten",
+        "wordCount": 490,
+        "text": "Leyla wurde in Stuttgart geboren, aber ihre Eltern kamen aus dem Iran. Zu Hause sprachen sie Persisch, in der Schule Deutsch. Schon als Kind fragte sie sich manchmal: Wo gehore ich eigentlich dazu?\n\nIn der Grundschule war das kein grosses Thema. Alle spielten zusammen, und die Herkunft spielte kaum eine Rolle. Doch in der Pubertat wurde es komplizierter. Auf Partys fuhlte sie sich manchmal fremd, obwohl sie doch hier aufgewachsen war. Und wenn ihre Familie den Nowruz feierte, das persische Neujahr, fragten deutsche Freunde verwundert: Was ist das denn?\n\nLeyla beschloss irgendwann, diese Spannung nicht als Last, sondern als Reichtum zu betrachten. Sie studierte Kulturwissenschaften und schrieb ihre Masterarbeit uber Identitat in der Migration. Das Thema traf sie personlich.\n\nWahrend des Studiums lernte sie viele Menschen kennen, die ahnliche Erfahrungen gemacht hatten. Kinder von Einwanderern aus der Turkei, Vietnam oder Marokko. Alle hatten ihre eigenen Geschichten, und doch gab es Gemeinsamkeiten.\n\nNach dem Studium begann Leyla, Workshops fur Jugendliche mit Migrationshintergrund anzubieten. Sie sprach uber Identitat, Zugehorigkeit und den Mut, mehrere Kulturen in sich zu tragen. Die Reaktionen der Jugendlichen bewegten sie tief.\n\nDu bist nicht halb und halb, sagte sie ihnen. Du bist ganz und ganz. Dieser Satz stammte von ihrer Mutter und hatte ihr selbst sehr geholfen.\n\nHeute ist Leyla 34 Jahre alt. Sie lebt in Frankfurt, spricht fliessend Deutsch, Persisch und Englisch, und fuhlt sich in allen drei Welten zu Hause. Die Frage Wo gehorst du hin? beantwortet sie inzwischen mit einem Lacheln: Uberall und nirgends, und das ist wunderbar."
+    },
+    {
+        "id": "a1_story_012",
+        "level": "A1",
+        "language": "de",
+        "title": "Das Wetter heute",
+        "wordCount": 150,
+        "text": "Heute ist das Wetter schon. Die Sonne scheint. Es ist warm, aber nicht zu heiss. Der Himmel ist blau.\n\nIch gehe in den Park. Viele Menschen sind dort. Kinder spielen. Hunde laufen. Alte Leute sitzen auf Banken.\n\nIch sitze unter einem Baum. Ich lese ein Buch. Manchmal schaue ich in den Himmel. Ein Vogel fliegt vorbei.\n\nUm vier Uhr kommen Wolken. Der Himmel wird grau. Es wird kuhler. Ich ziehe meine Jacke an.\n\nAm Abend regnet es ein bisschen. Ich bin zu Hause. Ich trinke heissen Tee. Der Regen ist ruhig und schon."
+    },
+    {
+        "id": "a2_story_013",
+        "level": "A2",
+        "language": "de",
+        "title": "Kochen fur Gaste",
+        "wordCount": 260,
+        "text": "Am Samstag kommen drei Freunde zu mir. Ich mochte fur sie kochen. Ich entscheide mich fur Spaghetti Bolognese. Das Rezept kenne ich gut.\n\nIch gehe am Morgen einkaufen. Ich brauche Hackfleisch, Tomaten, Zwiebeln, Knoblauch und Nudeln. Im Supermarkt finde ich alles schnell.\n\nZu Hause beginne ich um vier Uhr mit dem Kochen. Ich schneide die Zwiebeln. Das ist unangenehm, meine Augen tranen. Dann brate ich das Fleisch in der Pfanne. Es riecht sehr gut.\n\nIch fuge die Tomaten und Gewurze hinzu. Die Sosse kocht langsam. Ich ruhre manchmal um. Nach einer Stunde schmecke ich die Sosse ab. Sie braucht noch etwas Salz.\n\nUm sieben Uhr kommen meine Freunde. Wir setzen uns an den Tisch. Ich bringe das Essen. Alle essen viel. Das ist sehr lecker, sagt mein Freund Jonas. Ich freue mich sehr.\n\nNach dem Essen trinken wir Wein und sprechen lange. Ein schoner Abend."
+    },
+    {
+        "id": "b1_story_014",
+        "level": "B1",
+        "language": "de",
+        "title": "Ein Brief an die Zukunft",
+        "wordCount": 360,
+        "text": "Heute Abend schreibe ich einen Brief an mein zukunftiges Ich. Meine Lehrerin hat uns das als Hausaufgabe gegeben. Ich finde die Idee zuerst seltsam, aber dann fange ich an zu schreiben.\n\nLiebe Clara in zehn Jahren,\n\nIch bin jetzt siebzehn Jahre alt und sitze in meinem Zimmer. Draussen ist es dunkel. Ich frage mich oft, was ich in zehn Jahren mache. Wohne ich noch in Dusseldorf? Habe ich eine Familie?\n\nGerade lerne ich fur das Abitur. Es ist stressig, aber ich glaube, ich schaffe es. Mathe ist schwierig, aber Deutsch und Geschichte machen mir Spass. Ich mochte Journalistin werden.\n\nIch hoffe, dass du mutiger bist als ich. Ich denke manchmal zu viel nach und traue mich nicht, Dinge auszuprobieren. Bitte hab keine Angst vor dem Scheitern.\n\nUnd ich hoffe, dass du noch Kontakt zu deiner besten Freundin Nora hast. Sie ist sehr wichtig fur mich. Gute Freundschaften sollte man nie verlieren.\n\nPasse auf dich auf. Schlaf genug. Iss gut. Lach viel.\n\nIn Liebe, deine jungere Clara.\n\nIch lese den Brief noch einmal. Er klingt ein bisschen naiv, aber er ist ehrlich. Ich stecke ihn in einen Umschlag und schreibe das heutige Datum darauf. Vielleicht werde ich ihn wirklich in zehn Jahren offnen."
+    },
+    {
+        "id": "b2_story_015",
+        "level": "B2",
+        "language": "de",
+        "title": "Die Entscheidung",
+        "wordCount": 480,
+        "text": "Markus hatte zwei Angebote auf dem Tisch. Das erste kam von einer renommierten Unternehmensberatung in Munchen, das zweite von einer kleinen NGO in Nairobi, die an Bildungsprojekten arbeitete. Er hatte drei Tage Zeit, um sich zu entscheiden.\n\nSeine Eltern rieten ihm eindeutig zum ersten Angebot. Das Gehalt war dreimal so hoch, die Karrierechancen hervorragend. Du hast lange genug studiert, sagte sein Vater. Jetzt ist es Zeit, etwas aufzubauen.\n\nSeine Freundin Julia sah das anders. Sie kannte Markus seit Jahren und wusste, dass er immer von sinnvoller Arbeit getraumt hatte. Du wirst unglucklich sein, wenn du nur fur Geld arbeitest, sagte sie leise. Das weisst du selbst.\n\nMarkus verbrachte die Nachte damit, Pro-und-Contra-Listen zu schreiben. Munchen bedeutete Sicherheit, Status und Komfort. Nairobi bedeutete Abenteuer, Sinn und Unsicherheit. Beide Wege hatten ihre Berechtigung.\n\nAm zweiten Tag rief er einen alten Freund an, der bereits seit zwei Jahren in der Entwicklungszusammenarbeit arbeitete. Es ist schwieriger als du denkst, sagte dieser offen. Burokratie, kulturelle Missverstandnisse, fehlende Ressourcen. Aber wenn etwas funktioniert, auch kleine Dinge, dann ist das unbezahlbar.\n\nAm dritten Morgen wachte Markus um funf Uhr auf. Er lag in der Stille und wartete darauf, dass eine innere Stimme sprach. Und tatsachlich: Er merkte, dass er Angst vor Nairobi hatte. Aber es war eine andere Art von Angst als die vor Langeweile und Leere, die er bei dem Gedanken an Munchen spurte.\n\nEr rief die NGO an und sagte zu. Dann schrieb er der Beratung eine hofliche Absage.\n\nSeine Mutter weinte ein bisschen. Sein Vater schwieg. Julia umarmte ihn lange.\n\nFunf Monate spater landete Markus in Nairobi. Es war heiss, laut und vollkommen anders als alles, was er kannte. Er war aufgeregt und erschopft zugleich. Er wusste nicht, ob er die richtige Entscheidung getroffen hatte. Aber er hatte das Gefuhl, zumindest seine eigene."
+    },
+    {
+        "id": "a1_story_016",
+        "level": "A1",
+        "language": "de",
+        "title": "Familie Muller",
+        "wordCount": 170,
+        "text": "Das ist Familie Muller. Die Familie wohnt in Stuttgart. Sie haben ein Haus mit einem Garten.\n\nDer Vater heisst Peter. Er ist Lehrer. Er arbeitet in einer Schule. Er ist 45 Jahre alt.\n\nDie Mutter heisst Sandra. Sie arbeitet in einem Krankenhaus. Sie ist Krankenschwester. Sie ist 43 Jahre alt.\n\nSie haben zwei Kinder. Der Sohn heisst Tim. Er ist 14 Jahre alt. Tim spielt gern Fussball. Die Tochter heisst Emma. Sie ist 10 Jahre alt. Emma liest gern Bucher.\n\nSie haben auch eine Katze. Die Katze heisst Mimi. Sie ist klein und weiss.\n\nAm Wochenende kocht Peter fur die Familie. Sie essen zusammen am Tisch. Sie sprechen und lachen. Die Familie ist glucklich."
+    },
+    {
+        "id": "a2_story_017",
+        "level": "A2",
+        "language": "de",
+        "title": "Auf dem Flohmarkt",
+        "wordCount": 245,
+        "text": "Am Sonntag gehe ich mit meiner Freundin Klara auf den Flohmarkt. Der Flohmarkt ist am Stadtpark. Es gibt viele Stande mit alten Sachen: Bucher, Kleider, Lampen, Spielzeug und vieles mehr.\n\nWir kommen um zehn Uhr an. Es sind schon viele Menschen da. Klara sucht alten Schmuck. Ich suche Bucher.\n\nAn einem Stand sehe ich interessante Bucher. Ich nehme ein altes Buch uber Kochrezepte. Es kostet nur einen Euro. Der Verkaufer ist freundlich.\n\nKlara findet eine schone alte Halskette. Wie viel kostet das?, fragt sie. Funf Euro, sagt die Frau. Klara mochte weniger bezahlen. Drei Euro?, fragt sie. Die Frau sagt: Vier Euro. Klara kauft die Kette.\n\nNach zwei Stunden haben wir Hunger. Wir kaufen Wurstchen an einem Stand. Sie schmecken sehr gut.\n\nAm Mittag fahren wir nach Hause. Ich bin zufrieden. Der Flohmarkt war ein Spass."
+    },
+    {
+        "id": "b1_story_018",
+        "level": "B1",
+        "language": "de",
+        "title": "Reise ohne Plan",
+        "wordCount": 395,
+        "text": "Nina hat immer alles geplant. Jede Reise, jedes Detail, jede Minute. Diesmal wollte sie es anders machen. Sie buchte nur ein Zugticket nach Prag und liess alles andere offen.\n\nAm ersten Tag in Prag irrte sie durch die Altstadt ohne Karte. Sie fand ein kleines Cafe in einer Gasse, das sie nie gefunden hatte, wenn sie einen Stadtplan benutzt hatte. Der Kaffee war stark, die Besitzerin sprach perfekt Deutsch und erzahlte ihr Geschichten uber die Stadt.\n\nAm zweiten Tag traf Nina im Hostel eine Gruppe Backpacker aus Australien. Sie lud sie ein, mitzukommen, und sie akzeptierten. Zusammen fuhren sie mit dem Zug in eine kleine Stadt ausserhalb von Prag. Die Australier wussten auch nicht, was sie dort erwartete.\n\nSie fanden ein verlassenes Schloss auf einem Hugel. Es war nicht im Reisefuhrer. Sie kletterten hinauf und genossen den Ausblick uber das grune Land. Nina machte viele Fotos.\n\nAm dritten Tag begann es zu regnen. Nina sass im Hostel und sprach stundenlang mit einem jungen Mann aus Portugal. Er studierte Philosophie und stellte interessante Fragen. Wozu reist man eigentlich? Was suchen wir, wenn wir an fremde Orte fahren?\n\nNina dachte uber seine Fragen nach. Vielleicht suchte sie Uberraschungen. Oder Freiheit. Oder einfach das Unerwartete.\n\nAls sie vier Tage spater zuruck nach Berlin fuhr, war sie entspannter als nach jeder anderen Reise. Nicht weil alles perfekt war, sondern weil nichts geplant war."
+    },
+    {
+        "id": "b2_story_019",
+        "level": "B2",
+        "language": "de",
+        "title": "Das alte Haus",
+        "wordCount": 460,
+        "text": "Das Haus stand seit dreissig Jahren leer. Die weissen Jalousien waren vergilbt, der Garten verwildert, die Eingangstreppe bemoost. Im Dorf sagten die Leute, das Haus sei verflucht. Naturlich glaubte daran niemand wirklich, und doch mied man es.\n\nAls Katharina das Haus kaufte, schauten die Nachbarn skeptisch. Eine Frau aus der Stadt, alleinstehend, ohne offensichtlichen Grund, dieses Wrack zu kaufen. Aber Katharina war Architektin und sah, was andere nicht sahen: Substanz.\n\nDer erste Winter im Haus war hart. Die Heizung funktionierte kaum, das Dach hatte Risse, und nachts horte sie seltsame Gerausche aus dem Keller. Sie schlief in Pullovern und erzahlte ihren Freunden in Berlin davon wie von einem Abenteuer.\n\nIm Fruhling begann die eigentliche Arbeit. Handwerker kamen und gingen. Katharina arbeitete selbst mit, wo sie konnte: schleppte, schliff, strich. Sie entdeckte unter mehreren Schichten Tapete wunderschone alte Kacheln. Im Keller fand sie Kisten mit Briefen aus den 1950er Jahren.\n\nDie Briefe gehorten einer Frau namens Helene, die in diesem Haus gelebt hatte. Sie schrieb an ihren Mann, der weit entfernt arbeitete. Die Briefe waren zartlich, manchmal verzweifelt, immer ehrlich. Katharina las sie alle und hatte das Gefuhl, in ein fremdes und doch vertrautes Leben einzutauchen.\n\nSie entschied, einen Teil des Hauses als kleines Gastezimmer zu vermieten. Die erste Gastin war eine altere Frau aus der Nachbarstadt. Sie sass abends mit Katharina in der Kuche und erzahlte, dass sie Helene gekannt hatte. Sie war eine starke Frau, sagte sie. Sie hat allein gebaut, allein getrauert, allein gelebt.\n\nKatharina schaute auf die renovierten Wande, die neuen Fenster, das alte Holz, das sie gerettet hatte. Das Haus war nicht mehr verflucht. Es war lebendig."
+    },
+    {
+        "id": "a1_story_020",
+        "level": "A1",
+        "language": "de",
+        "title": "Mein Zimmer",
+        "wordCount": 145,
+        "text": "Ich zeige dir mein Zimmer. Es ist nicht sehr gross, aber ich mag es.\n\nIch habe ein Bett. Das Bett ist braun. Ich schlafe gut dort. Neben dem Bett steht eine Lampe.\n\nIch habe einen Schreibtisch. Auf dem Schreibtisch liegt mein Computer. Ich lerne und arbeite dort.\n\nIch habe einen Schrank fur meine Kleider. Der Schrank ist weiss. Ich habe viele Hemden und Hosen.\n\nAn der Wand hangen Fotos. Die Fotos zeigen meine Familie und meine Freunde. Ich schaue sie gern an.\n\nDas Fenster ist gross. Ich sehe den Park vom Fenster. Morgens kommt die Sonne herein. Das ist schon.\n\nMein Zimmer ist mein Lieblingsort."
+    },
+    {
+        "id": "b1_story_021",
+        "level": "B1",
+        "language": "de",
+        "title": "Digitales Detox",
+        "wordCount": 370,
+        "text": "Ben verbringt taglich mehr als sieben Stunden vor dem Bildschirm. Arbeit, Social Media, Serien, Nachrichten, alles passiert auf dem Handy oder dem Laptop. Eines Abends merkt er, dass er sich trotz standiger Verbindung einsam fuhlt.\n\nEr beschliesst, ein Experiment zu machen: eine Woche ohne Smartphone. Er kauft sich einen einfachen Wecker, informiert seine wichtigsten Kontakte und legt das Handy in eine Schublade.\n\nDie ersten zwei Tage sind schwierig. Ben greift mehrfach instinktiv in die Tasche, obwohl dort nichts ist. Er weiss nicht, was seine Freunde gerade machen. Er kann keine Fotos beim Essen posten. Es fuhlt sich merkwurdig an.\n\nAb dem dritten Tag verandert sich etwas. Ben liest wieder richtige Bucher. Er kocht langsam und aufmerksam. Er geht abends spazieren und schaut wirklich hin, an Hauser, Gesichter, Fenster.\n\nEr beginnt, ein Tagebuch zu fuhren. Dabei merkt er, wie viele Gedanken er normalerweise durch Scrollen unterdruckt hat. Unangenehme Gefuhle, unerledigte Gesprache, echte Wunsche.\n\nAm letzten Abend holt er das Handy heraus. Dreiundachtzig Nachrichten, zwolf verpasste Anrufe, unzahlige Benachrichtigungen. Er scrollt kurz durch und stellt das Handy dann wieder weg.\n\nNachher setzt er klare Regeln: Morgens keine sozialen Medien, abends Handy in der Kuche. Er weiss, dass die Technologie nutzlich ist. Aber er mochte entscheiden, wann und wie er sie benutzt."
+    },
+    {
+        "id": "a2_story_022",
+        "level": "A2",
+        "language": "de",
+        "title": "Ein Abend im Kino",
+        "wordCount": 230,
+        "text": "Heute Abend gehe ich mit meinem Freund Paul ins Kino. Wir wollen einen neuen Film sehen. Der Film heisst 'Die letzte Reise' und ist ein Abenteuerfilm.\n\nWir kaufen die Tickets online. Das ist praktisch. Dann fahren wir mit der U-Bahn zum Kino. Das Kino ist in der Innenstadt.\n\nVor dem Film kaufen wir Popcorn. Paul nimmt susses Popcorn, ich nehme salziges. Wir suchen unsere Platze. Sie sind in der Mitte, das ist ideal.\n\nDer Film beginnt. Er ist sehr spannend. Die Hauptfigur macht eine lange Reise durch die Wuste. Es gibt gefahrliche Momente. Paul und ich sagen manchmal 'Oh!' oder 'Achtung!'\n\nNach zwei Stunden ist der Film zu Ende. Wir gehen hinaus. Draussen ist es kalt. Wir sprechen uber den Film. Paul findet das Ende schon. Ich finde es ein bisschen traurig.\n\nWir gehen noch in ein Cafe und trinken heisse Schokolade. Dann fahren wir nach Hause. Es war ein schoner Abend."
     }
 ]
