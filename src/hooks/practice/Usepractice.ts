@@ -29,6 +29,16 @@ interface UsePracticeReturn {
     resetPractice: () => void;
 }
 
+const fisherYatesShuffle = <T>(array: T[]): T[] => {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+};
+
+
 /**
  * Practice hook - Kelime pratik sorularını yönetir
  * - AsyncStorage'dan kelimeleri çeker
@@ -88,23 +98,17 @@ export const usePractice = (questionCount: number = 10): UsePracticeReturn => {
      * Kelimelerden rastgele pratik soruları oluşturur
      */
     const generateQuestions = (words: Word[], count: number): PracticeQuestion[] => {
-        // Shuffle kelimeleri
-        const shuffled = [...words].sort(() => Math.random() - 0.5);
+        const shuffled = fisherYatesShuffle(words);
         const selectedWords = shuffled.slice(0, Math.min(count, words.length));
 
         return selectedWords.map(word => {
-            // Yanlış cevap seçenekleri için diğer kelimeleri al
             const otherWords = words.filter(w => w.id !== word.id);
-            const wrongAnswers = otherWords
-                .sort(() => Math.random() - 0.5)
+            const wrongAnswers = fisherYatesShuffle(otherWords)
                 .slice(0, 3)
                 .map(w => w.meaning);
 
-            // Tüm seçenekleri karıştır
-            const allOptions = [word.meaning, ...wrongAnswers]
-                .sort(() => Math.random() - 0.5);
+            const allOptions = fisherYatesShuffle([word.meaning, ...wrongAnswers]);
 
-            // Örnek cümle varsa al
             const example = word.examples && word.examples.length > 0
                 ? word.examples[0]
                 : undefined;

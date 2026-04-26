@@ -1,9 +1,9 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ROUTES } from '../../constants/routes';
 
-// Tab konfigürasyonu
 const TAB_CONFIG = [
     {
         name: ROUTES.HOME,
@@ -48,6 +48,8 @@ const TAB_CONFIG = [
 ];
 
 export default function TabsLayout() {
+    const insets = useSafeAreaInsets();
+
     return (
         <Tabs
             screenOptions={{
@@ -64,8 +66,17 @@ export default function TabsLayout() {
                     fontWeight: '700',
                     color: '#1C1C1E',
                 },
-                tabBarStyle: styles.tabBar,
-                tabBarShowLabel: false, // label'ı kendimiz çiziyoruz
+                tabBarStyle: {
+                    backgroundColor: '#fff',
+                    borderTopWidth: 1,
+                    borderTopColor: '#F2F2F7',
+                    paddingTop: 8,
+                    paddingBottom: Math.max(insets.bottom, 8),
+                    paddingHorizontal: 0,
+                    elevation: 0,
+                    shadowOpacity: 0,
+                },
+                tabBarShowLabel: false,
             }}
         >
             {TAB_CONFIG.map((tab) => (
@@ -74,7 +85,7 @@ export default function TabsLayout() {
                     name={tab.name}
                     options={{
                         title: tab.title,
-                        tabBarIcon: ({ focused, color }) => (
+                        tabBarIcon: ({ focused }) => (
                             <TabIcon
                                 focused={focused}
                                 icon={tab.icon}
@@ -90,7 +101,6 @@ export default function TabsLayout() {
     );
 }
 
-// ── Özel Tab İkonu ────────────────────────────────────────────────────────────
 interface TabIconProps {
     focused: boolean;
     icon: any;
@@ -102,7 +112,6 @@ interface TabIconProps {
 function TabIcon({ focused, icon, iconOutline, label, activeColor }: TabIconProps) {
     return (
         <View style={styles.tabItem}>
-            {/* Aktifken renkli arka plan pill */}
             <View style={[
                 styles.iconWrapper,
                 focused && { backgroundColor: activeColor + '18' }
@@ -113,7 +122,6 @@ function TabIcon({ focused, icon, iconOutline, label, activeColor }: TabIconProp
                     color={focused ? activeColor : '#AEAEB2'}
                 />
             </View>
-            {/* Etiket */}
             <Text style={[
                 styles.tabLabel,
                 { color: focused ? activeColor : '#AEAEB2' },
@@ -125,19 +133,7 @@ function TabIcon({ focused, icon, iconOutline, label, activeColor }: TabIconProp
     );
 }
 
-// ── Stiller ───────────────────────────────────────────────────────────────────
 const styles = StyleSheet.create({
-    tabBar: {
-        backgroundColor: '#fff',
-        borderTopWidth: 1,
-        borderTopColor: '#F2F2F7',
-        height: Platform.OS === 'ios' ? 90 : 72,
-        paddingTop: 8,
-        paddingBottom: Platform.OS === 'ios' ? 28 : 10,
-        paddingHorizontal: 0,
-        elevation: 0,
-        shadowOpacity: 0,
-    },
     tabItem: {
         alignItems: 'center',
         justifyContent: 'center',

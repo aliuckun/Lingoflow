@@ -1,5 +1,5 @@
 import * as DocumentPicker from 'expo-document-picker';
-import * as FileSystem from 'expo-file-system';
+import * as FileSystem from 'expo-file-system/legacy'; // ← sadece bu satır değişti
 import * as Sharing from 'expo-sharing';
 import { Alert } from 'react-native';
 import { PartOfSpeech, Word } from '../types/word';
