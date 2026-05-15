@@ -1,42 +1,9 @@
-/**
- * src/hooks/useProgress.ts
- *
- * AsyncStorage'daki kelime verisinden profil istatistiklerini hesaplar.
- * Ekran her focus olduğunda yeniden yükler.
- */
-
 import { useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { VocabularyService } from '../services/vocabularyService';
+import { getDailyLog, getLast7Days, getStreak } from '../services/streakService';
+import { VocabularyService, getDueWords } from '../services/vocabularyService';
 import { PartOfSpeech, Word } from '../types/word';
-
-export interface ProgressStats {
-    // Genel
-    totalWords: number;
-    learnedWords: number;       // familiarity >= 4
-    favoriteWords: number;
-    wordsWithExamples: number;
-
-    // Pratik
-    totalCorrect: number;
-    totalWrong: number;
-    successRate: number;        // 0–100
-    totalPracticed: number;     // en az 1 kez pratik yapılan kelime sayısı
-
-    // Kelime türü dağılımı
-    posDist: { pos: PartOfSpeech; count: number; label: string; color: string }[];
-
-    // Aşinalık dağılımı (0–5)
-    familiarityDist: { level: number; count: number; label: string }[];
-
-    // Son eklenen 5 kelime
-    recentWords: Word[];
-
-    // Rozet hesabı
-    badges: Badge[];
-
-    isLoading: boolean;
-}
+import { DailyLogEntry, StreakData } from '../types/setting';
 
 export interface Badge {
     id: string;
@@ -46,119 +13,131 @@ export interface Badge {
     unlocked: boolean;
 }
 
+export interface WeekDay {
+    date: string;
+    label: string;
+    practiced: number;
+    correct: number;
+}
+
+export interface ProgressStats {
+    // Genel
+    totalWords: number;
+    learnedWords: number;
+    favoriteWords: number;
+    wordsWithExamples: number;
+
+    // Pratik
+    totalCorrect: number;
+    totalWrong: number;
+    successRate: number;
+    totalPracticed: number;
+
+    // Streak & hedef
+    streak: StreakData;
+    dailyGoal: number;
+    weekDays: WeekDay[];
+
+    // SM-2
+    dueCount: number;
+
+    // En çok yanlış yapılan
+    hardestWords: Word[];
+
+    // Dağılımlar
+    posDist: { pos: PartOfSpeech; count: number; label: string; color: string }[];
+    familiarityDist: { level: number; count: number; label: string }[];
+
+    // Son eklenenler
+    recentWords: Word[];
+
+    // Rozetler
+    badges: Badge[];
+
+    isLoading: boolean;
+}
+
 const POS_LABELS: Record<PartOfSpeech, string> = {
     noun: 'İsim', verb: 'Fiil', adjective: 'Sıfat', adverb: 'Zarf',
     preposition: 'Edat', conjunction: 'Bağlaç', pronoun: 'Zamir', other: 'Diğer'
 };
-
 const POS_COLORS: Record<PartOfSpeech, string> = {
     noun: '#5856D6', verb: '#FF9500', adjective: '#34C759', adverb: '#AF52DE',
     preposition: '#5AC8FA', conjunction: '#FF2D55', pronoun: '#FFCC00', other: '#8E8E93'
 };
-
 const FAM_LABELS = ['Bilinmiyor', 'Yeni', 'Tanıdık', 'Biliyorum', 'İyi Biliyorum', 'Tam Öğrendim'];
 
-function computeBadges(words: Word[]): Badge[] {
+function computeBadges(words: Word[], streak: StreakData): Badge[] {
     const total = words.length;
     const learned = words.filter(w => (w.familiarity ?? 0) >= 4).length;
     const favorites = words.filter(w => w.isFavorite).length;
     const totalCorrect = words.reduce((s, w) => s + (w.correctCount ?? 0), 0);
     const withExamples = words.filter(w => w.examples?.length > 0).length;
     const verbCount = words.filter(w => w.partOfSpeech === 'verb').length;
+    const perfektCount = words.filter(w => w.verbDetails?.perfekt?.partizip2).length;
 
     return [
-        {
-            id: 'first_word',
-            emoji: '🌱',
-            title: 'İlk Adım',
-            description: 'İlk kelimeni ekle',
-            unlocked: total >= 1
-        },
-        {
-            id: 'ten_words',
-            emoji: '📚',
-            title: 'Kelime Avcısı',
-            description: '10 kelime ekle',
-            unlocked: total >= 10
-        },
-        {
-            id: 'fifty_words',
-            emoji: '🏆',
-            title: 'Kelime Ustası',
-            description: '50 kelime ekle',
-            unlocked: total >= 50
-        },
-        {
-            id: 'learned_ten',
-            emoji: '🧠',
-            title: 'Öğrenci',
-            description: '10 kelimeyi tam öğren',
-            unlocked: learned >= 10
-        },
-        {
-            id: 'hundred_correct',
-            emoji: '🎯',
-            title: 'Keskin Nişancı',
-            description: '100 doğru cevap ver',
-            unlocked: totalCorrect >= 100
-        },
-        {
-            id: 'favorites',
-            emoji: '⭐',
-            title: 'Koleksiyoner',
-            description: '5 kelimeyi favorile',
-            unlocked: favorites >= 5
-        },
-        {
-            id: 'examples',
-            emoji: '✍️',
-            title: 'Cümle Kurdu',
-            description: '10 kelimeye örnek cümle ekle',
-            unlocked: withExamples >= 10
-        },
-        {
-            id: 'verbs',
-            emoji: '⚡',
-            title: 'Fiil Kaşifi',
-            description: '10 fiil öğren',
-            unlocked: verbCount >= 10
-        },
+        { id: 'first_word', emoji: '🌱', title: 'İlk Adım', description: 'İlk kelimeni ekle', unlocked: total >= 1 },
+        { id: 'ten_words', emoji: '📚', title: 'Kelime Avcısı', description: '10 kelime ekle', unlocked: total >= 10 },
+        { id: 'fifty_words', emoji: '🏆', title: 'Kelime Ustası', description: '50 kelime ekle', unlocked: total >= 50 },
+        { id: 'learned_ten', emoji: '🧠', title: 'Öğrenci', description: '10 kelimeyi tam öğren', unlocked: learned >= 10 },
+        { id: 'hundred_correct', emoji: '🎯', title: 'Keskin Nişancı', description: '100 doğru cevap ver', unlocked: totalCorrect >= 100 },
+        { id: 'favorites', emoji: '⭐', title: 'Koleksiyoner', description: '5 kelimeyi favorile', unlocked: favorites >= 5 },
+        { id: 'examples', emoji: '✍️', title: 'Cümle Kurdu', description: '10 kelimeye örnek cümle ekle', unlocked: withExamples >= 10 },
+        { id: 'verbs', emoji: '⚡', title: 'Fiil Kaşifi', description: '10 fiil öğren', unlocked: verbCount >= 10 },
+        { id: 'perfekt', emoji: '🕰️', title: 'Perfekt Ustası', description: '5 fiilin Perfektini gir', unlocked: perfektCount >= 5 },
+        { id: 'streak7', emoji: '🔥', title: '7 Gün Serisi', description: '7 gün üst üste pratik yap', unlocked: streak.longestStreak >= 7 },
+        { id: 'streak30', emoji: '💎', title: 'Demir Kararlı', description: '30 gün üst üste pratik yap', unlocked: streak.longestStreak >= 30 },
     ];
 }
 
+const DEFAULT: ProgressStats = {
+    totalWords: 0, learnedWords: 0, favoriteWords: 0, wordsWithExamples: 0,
+    totalCorrect: 0, totalWrong: 0, successRate: 0, totalPracticed: 0,
+    streak: { currentStreak: 0, longestStreak: 0, lastPracticeDate: '', shieldActive: false, todayCount: 0 },
+    dailyGoal: 20,
+    weekDays: [],
+    dueCount: 0,
+    hardestWords: [],
+    posDist: [], familiarityDist: [], recentWords: [], badges: [],
+    isLoading: true,
+};
+
 export function useProgress(): ProgressStats {
-    const [stats, setStats] = useState<ProgressStats>({
-        totalWords: 0,
-        learnedWords: 0,
-        favoriteWords: 0,
-        wordsWithExamples: 0,
-        totalCorrect: 0,
-        totalWrong: 0,
-        successRate: 0,
-        totalPracticed: 0,
-        posDist: [],
-        familiarityDist: [],
-        recentWords: [],
-        badges: [],
-        isLoading: true,
-    });
+    const [stats, setStats] = useState<ProgressStats>(DEFAULT);
 
     const load = useCallback(async () => {
         setStats(s => ({ ...s, isLoading: true }));
-        const words = await VocabularyService.getAllWords();
 
-        // Genel
+        const [words, streak, log] = await Promise.all([
+            VocabularyService.getAllWords(),
+            getStreak(),
+            getDailyLog(),
+        ]);
+
         const totalWords = words.length;
         const learnedWords = words.filter(w => (w.familiarity ?? 0) >= 4).length;
         const favoriteWords = words.filter(w => w.isFavorite).length;
         const wordsWithExamples = words.filter(w => w.examples?.length > 0).length;
 
-        // Pratik
         const totalCorrect = words.reduce((s, w) => s + (w.correctCount ?? 0), 0);
         const totalWrong = words.reduce((s, w) => s + (w.wrongCount ?? 0), 0);
         const totalAttempts = totalCorrect + totalWrong;
         const successRate = totalAttempts > 0 ? Math.round((totalCorrect / totalAttempts) * 100) : 0;
         const totalPracticed = words.filter(w => (w.correctCount ?? 0) + (w.wrongCount ?? 0) > 0).length;
+
+        // SM-2 bekleyenler
+        const dueCount = getDueWords(words).length;
+
+        // En çok yanlış (en az 1 yanlış, yanlış oranına göre sıralı)
+        const hardestWords = [...words]
+            .filter(w => (w.wrongCount ?? 0) > 0)
+            .sort((a, b) => {
+                const ra = (a.wrongCount ?? 0) / Math.max(1, (a.correctCount ?? 0) + (a.wrongCount ?? 0));
+                const rb = (b.wrongCount ?? 0) / Math.max(1, (b.correctCount ?? 0) + (b.wrongCount ?? 0));
+                return rb - ra;
+            })
+            .slice(0, 5);
 
         // POS dağılımı
         const posMap: Partial<Record<PartOfSpeech, number>> = {};
@@ -171,30 +150,23 @@ export function useProgress(): ProgressStats {
         const famMap: Record<number, number> = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
         words.forEach(w => { famMap[w.familiarity ?? 0]++; });
         const familiarityDist = Object.entries(famMap).map(([level, count]) => ({
-            level: Number(level),
-            count,
-            label: FAM_LABELS[Number(level)]
+            level: Number(level), count, label: FAM_LABELS[Number(level)]
         }));
 
-        // Son eklenenler
-        const recentWords = [...words]
-            .sort((a, b) => b.createdAt - a.createdAt)
-            .slice(0, 5);
-
-        // Rozetler
-        const badges = computeBadges(words);
+        const recentWords = [...words].sort((a, b) => b.createdAt - a.createdAt).slice(0, 5);
+        const weekDays = getLast7Days(log);
+        const badges = computeBadges(words, streak);
 
         setStats({
             totalWords, learnedWords, favoriteWords, wordsWithExamples,
             totalCorrect, totalWrong, successRate, totalPracticed,
+            streak, dailyGoal: 20, weekDays, dueCount, hardestWords,
             posDist, familiarityDist, recentWords, badges,
             isLoading: false,
         });
     }, []);
 
-    useFocusEffect(
-        useCallback(() => { load(); }, [load])
-    );
+    useFocusEffect(useCallback(() => { load(); }, [load]));
 
     return stats;
 }

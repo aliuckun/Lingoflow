@@ -3,7 +3,7 @@
  *
  * useWordDetail hook'unun üzerine inşa edilmiş düzenleme katmanı.
  * - Görüntüleme / düzenleme modu geçişi
- * - Form field state'leri (word, meaning, pos, examples, verbDetails)
+ * - Form field state'leri (word, meaning, pos, examples, verbDetails, perfekt)
  * - Kaydet: updateWord çağırır
  * - Sil: deleteWord çağırır, başarılıysa geri döner
  * - toggleFavorite, updateFamiliarity: useWordDetail'den direkt geçer
@@ -11,7 +11,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { Alert } from 'react-native';
-import { Example, PartOfSpeech, VerbDetails, Word } from '../../types/word';
+import { Example, PartOfSpeech, PerfektDetails, VerbDetails, Word } from '../../types/word';
 import { useWordDetail } from './useWorddetail';
 
 // ─── Tip tanımları ────────────────────────────────────────────────────────────
@@ -47,6 +47,10 @@ export interface UseWordEditReturn {
     editConjugations: ConjugationFields;
     setEditConjugations: (v: ConjugationFields) => void;
 
+    // YENİ: Perfekt alanları
+    editPerfekt: PerfektDetails;
+    setEditPerfekt: (v: PerfektDetails) => void;
+
     // İşlemler
     isSaving: boolean;
     saveEdits: () => Promise<void>;
@@ -62,6 +66,16 @@ export interface UseWordEditReturn {
     updateExample: (index: number, field: keyof Example, value: string) => void;
 }
 
+const DEFAULT_CONJUGATIONS: ConjugationFields = {
+    ich: '', du: '', erSieEs: '', wir: '', ihr: '', sieSie: ''
+};
+
+const DEFAULT_PERFEKT: PerfektDetails = {
+    partizip2: '',
+    hilfsverb: 'haben',
+    perfektSatz: '',
+};
+
 // ─── Hook ─────────────────────────────────────────────────────────────────────
 
 export const useWordEdit = (wordId: string): UseWordEditReturn => {
@@ -71,14 +85,13 @@ export const useWordEdit = (wordId: string): UseWordEditReturn => {
     const [isEditMode, setIsEditMode] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
 
-    // Form field'ları (word nesnesinden başlatılır, her sıfırlamada da kullanılır)
+    // Form field'ları
     const [editWord, setEditWord] = useState('');
     const [editMeaning, setEditMeaning] = useState('');
     const [editPos, setEditPos] = useState<PartOfSpeech>('noun');
     const [editExamples, setEditExamples] = useState<Example[]>([]);
-    const [editConjugations, setEditConjugations] = useState<ConjugationFields>({
-        ich: '', du: '', erSieEs: '', wir: '', ihr: '', sieSie: ''
-    });
+    const [editConjugations, setEditConjugations] = useState<ConjugationFields>(DEFAULT_CONJUGATIONS);
+    const [editPerfekt, setEditPerfekt] = useState<PerfektDetails>(DEFAULT_PERFEKT);
 
     // Word yüklenince form'u doldur
     const populateForm = useCallback((w: Word) => {
@@ -89,7 +102,13 @@ export const useWordEdit = (wordId: string): UseWordEditReturn => {
         setEditConjugations(
             w.verbDetails?.conjugations
                 ? { ...w.verbDetails.conjugations }
-                : { ich: '', du: '', erSieEs: '', wir: '', ihr: '', sieSie: '' }
+                : DEFAULT_CONJUGATIONS
+        );
+        // YENİ: mevcut perfekt verisini form'a yükle
+        setEditPerfekt(
+            w.verbDetails?.perfekt
+                ? { ...w.verbDetails.perfekt }
+                : DEFAULT_PERFEKT
         );
     }, []);
 
@@ -108,13 +127,25 @@ export const useWordEdit = (wordId: string): UseWordEditReturn => {
 
         setIsSaving(true);
         try {
-            const verbDetails: VerbDetails | undefined =
-                editPos === 'verb'
-                    ? {
-                        infinitive: editWord.trim(),
-                        conjugations: editConjugations
-                    }
-                    : undefined;
+            let verbDetails: VerbDetails | undefined = undefined;
+
+            if (editPos === 'verb') {
+                // Perfekt doluysa ekle, boşsa undefined bırak
+                const perfektToSave: PerfektDetails | undefined =
+                    editPerfekt.partizip2.trim()
+                        ? {
+                            partizip2: editPerfekt.partizip2.trim(),
+                            hilfsverb: editPerfekt.hilfsverb,
+                            perfektSatz: editPerfekt.perfektSatz?.trim() || undefined,
+                        }
+                        : undefined;
+
+                verbDetails = {
+                    infinitive: editWord.trim(),
+                    conjugations: editConjugations,
+                    perfekt: perfektToSave,
+                };
+            }
 
             const updates: Partial<Word> = {
                 word: editWord.trim(),
@@ -123,7 +154,7 @@ export const useWordEdit = (wordId: string): UseWordEditReturn => {
                 examples: editExamples.filter(
                     (e) => e.example.trim() || e.exampleMeaning.trim()
                 ),
-                verbDetails
+                verbDetails,
             };
 
             await detail.updateWord(updates);
@@ -193,6 +224,10 @@ export const useWordEdit = (wordId: string): UseWordEditReturn => {
         editConjugations,
         setEditConjugations,
 
+        // YENİ
+        editPerfekt,
+        setEditPerfekt,
+
         isSaving,
         saveEdits,
         cancelEdit,
@@ -203,6 +238,6 @@ export const useWordEdit = (wordId: string): UseWordEditReturn => {
 
         addExample,
         removeExample,
-        updateExample
+        updateExample,
     };
 };

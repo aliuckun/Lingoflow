@@ -5,46 +5,12 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ROUTES } from '../../constants/routes';
 
 const TAB_CONFIG = [
-    {
-        name: ROUTES.HOME,
-        title: 'LingoFlow',
-        label: 'Ana Sayfa',
-        icon: 'home' as const,
-        iconOutline: 'home-outline' as const,
-        color: '#5856D6',
-    },
-    {
-        name: ROUTES.LIBRARY,
-        title: 'Kitaplık',
-        label: 'Kitaplar',
-        icon: 'library' as const,
-        iconOutline: 'library-outline' as const,
-        color: '#007AFF',
-    },
-    {
-        name: ROUTES.PRACTICE,
-        title: 'Pratik Yap',
-        label: 'Pratik',
-        icon: 'pulse' as const,
-        iconOutline: 'pulse-outline' as const,
-        color: '#FF3B30',
-    },
-    {
-        name: ROUTES.PROGRESS,
-        title: 'İlerleme',
-        label: 'Profil',
-        icon: 'bar-chart' as const,
-        iconOutline: 'bar-chart-outline' as const,
-        color: '#34C759',
-    },
-    {
-        name: ROUTES.VOCABULARY,
-        title: 'Sözlük',
-        label: 'Sözlük',
-        icon: 'language' as const,
-        iconOutline: 'language-outline' as const,
-        color: '#FF9500',
-    },
+    { name: ROUTES.HOME, title: 'LingoFlow', label: 'Ana Sayfa', icon: 'home' as const, iconOutline: 'home-outline' as const, color: '#5856D6' },
+    { name: ROUTES.LIBRARY, title: 'Kitaplık', label: 'Kitaplar', icon: 'library' as const, iconOutline: 'library-outline' as const, color: '#007AFF' },
+    { name: ROUTES.VOCABULARY, title: 'Sözlük', label: 'Sözlük', icon: 'language' as const, iconOutline: 'language-outline' as const, color: '#FF9500' },
+    { name: ROUTES.PRACTICE, title: 'Pratik Yap', label: 'Pratik', icon: 'pulse' as const, iconOutline: 'pulse-outline' as const, color: '#FF3B30' },
+    { name: 'review', title: 'Tekrar', label: 'Tekrar', icon: 'refresh-circle' as const, iconOutline: 'refresh-circle-outline' as const, color: '#5856D6' },
+    { name: ROUTES.PROGRESS, title: 'İlerleme', label: 'İlerleme', icon: 'bar-chart' as const, iconOutline: 'bar-chart-outline' as const, color: '#34C759' },
 ];
 
 export default function TabsLayout() {
@@ -79,7 +45,7 @@ export default function TabsLayout() {
                 tabBarShowLabel: false,
             }}
         >
-            {TAB_CONFIG.map((tab) => (
+            {TAB_CONFIG.map(tab => (
                 <Tabs.Screen
                     key={tab.name}
                     name={tab.name}
@@ -112,21 +78,14 @@ interface TabIconProps {
 function TabIcon({ focused, icon, iconOutline, label, activeColor }: TabIconProps) {
     return (
         <View style={styles.tabItem}>
-            <View style={[
-                styles.iconWrapper,
-                focused && { backgroundColor: activeColor + '18' }
-            ]}>
+            <View style={[styles.iconWrapper, focused && { backgroundColor: activeColor + '18' }]}>
                 <Ionicons
                     name={focused ? icon : iconOutline}
-                    size={22}
+                    size={20}
                     color={focused ? activeColor : '#AEAEB2'}
                 />
             </View>
-            <Text style={[
-                styles.tabLabel,
-                { color: focused ? activeColor : '#AEAEB2' },
-                focused && styles.tabLabelActive
-            ]}>
+            <Text style={[styles.tabLabel, { color: focused ? activeColor : '#AEAEB2' }, focused && styles.tabLabelActive]}>
                 {label}
             </Text>
         </View>
@@ -134,25 +93,8 @@ function TabIcon({ focused, icon, iconOutline, label, activeColor }: TabIconProp
 }
 
 const styles = StyleSheet.create({
-    tabItem: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: 3,
-        flex: 1,
-    },
-    iconWrapper: {
-        width: 38,
-        height: 28,
-        borderRadius: 8,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    tabLabel: {
-        fontSize: 10,
-        fontWeight: '500',
-        letterSpacing: 0.1,
-    },
-    tabLabelActive: {
-        fontWeight: '700',
-    },
+    tabItem: { alignItems: 'center', justifyContent: 'center', gap: 2, flex: 1 },
+    iconWrapper: { width: 36, height: 26, borderRadius: 8, justifyContent: 'center', alignItems: 'center' },
+    tabLabel: { fontSize: 9, fontWeight: '500', letterSpacing: 0.1 },
+    tabLabelActive: { fontWeight: '700' },
 });
